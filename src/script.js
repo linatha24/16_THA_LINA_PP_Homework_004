@@ -5,6 +5,9 @@ let editingTask = null;
 function setPriority(priority) {
     selectedPriority = priority;
 }
+function setStatus(status) {
+    selectedStatus = status;
+}
 function deleteTask(button) {
     button.closest('.task-item').remove();
 }
@@ -19,11 +22,7 @@ function editTask(button){
     selectedPriority = oldPriority;
     selectedStatus = oldStatus;
 
-    document.getElementById("addButton").innerText = "Update Task";
-}
-
-function setStatus(status) {
-    selectedStatus = status;
+    document.getElementById("addBtn").innerText = "Update Task";
 }
 function addTask() {
     const taskInput = document.getElementById("inputBox");
@@ -48,7 +47,7 @@ function addTask() {
         editingTask.querySelector('.task-status').innerText = selectedStatus;
 
         editingTask = null;
-        document.getElementById("addButton").innerText = "Add Task";
+        document.getElementById("addBtn").innerText = "Add Task";
     }else{
         const tasklist = document.getElementById("taskList");
 
@@ -57,11 +56,11 @@ function addTask() {
         class="task-item bg-[#FFFFFF] rounded-[20px] py-8 px-6 flex flex-wrap justify-around items-center gap-8 shadow-lg mt-8"
       >
         <div class="flex justify-between gap-4 font-extrabold text-2xl w-full">
-          <p>${taskName}</p>
-          <p class="${priorityColor}">${selectedPriority}</p>
-          <p>${selectedStatus}</p>
+          <p class="task-name">${taskName}</p>
+          <p class="task-priority ${priorityColor}">${selectedPriority}</p>
+          <p class="task-status">${selectedStatus}</p>
           <div>
-            <button type="button" class="text-[blue]"
+            <button type="button" data-toggle="modal" data-target="#exampleModalMessage" onclick="editTask(this)" class="text-[blue]"
               ><i class="fa-regular fa-pen-to-square"></i
             ></button>
             <button type="button" class="text-[red]" onclick="deleteTask(this)"
